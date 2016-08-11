@@ -1,0 +1,28 @@
+{
+	"name": "armenio/zf3-permissions-acl",
+	"description": "The Cake ORM Module for Zend Framework 3",
+	"type": "library",
+	"keywords": [
+		"framework",
+		"permissions",
+		"zf3",
+		"acl",
+		"module"
+	],
+	"homepage": "https://github.com/armenio/zf3-permissions-acl",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Rafael Armênio",
+			"email": "rafael.armenio@gmail.com"
+		}
+	],
+	"require": {
+		"zendframework/zend-permissions-acl": "^2.6"
+	},
+    "autoload": {
+        "psr-4": {
+            "Armenio\\Permissions\\": "src/"
+        }
+    }
+}

@@ -1,6 +1,6 @@
 {
 	"name": "armenio/zf3-permissions-acl",
-	"description": "The Cake ORM Module for Zend Framework 3",
+	"description": "Zend Framework 3 permissions acl abstraction",
 	"type": "library",
 	"keywords": [
 		"framework",

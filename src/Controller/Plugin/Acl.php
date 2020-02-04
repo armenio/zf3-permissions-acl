@@ -2,7 +2,7 @@
 /**
  * Rafael Armenio <rafael.armenio@gmail.com>
  *
- * @link http://github.com/armenio for the source repository
+ * @link http://github.com/armenio
  */
 
 namespace Armenio\Permissions\Controller\Plugin;
@@ -41,6 +41,7 @@ class Acl extends AbstractPlugin
     public function setAcl(AclInterface $acl)
     {
         $this->acl = $acl;
+
         return $this;
     }
 

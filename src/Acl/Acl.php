@@ -78,7 +78,7 @@ class Acl extends ZendAcl
             }
 
             if (empty($resources)) {
-                return;
+                continue;
             }
 
             foreach ($resources as $resourceName => $privileges) {
@@ -87,7 +87,7 @@ class Acl extends ZendAcl
                 }
 
                 if (empty($privileges)) {
-                    return;
+                    continue;
                 }
 
                 foreach ($privileges as $privilegeName) {

@@ -8,10 +8,9 @@
 namespace Armenio\Permissions\Acl;
 
 use Zend\Permissions\Acl\Acl as ZendAcl;
+use Zend\Permissions\Acl\Exception\InvalidArgumentException;
 use Zend\Permissions\Acl\Resource\GenericResource as Resource;
 use Zend\Permissions\Acl\Role\GenericRole as Role;
-use Zend\Stdlib\Exception\InvalidArgumentException;
-use Zend\Stdlib\Exception\RuntimeException;
 
 /**
  * Class Acl
@@ -38,6 +37,11 @@ class Acl extends ZendAcl
      * @param array $roleResourcePrivileges
      * @return $this
      */
+
+    /**
+     * @param array $roleResourcePrivileges
+     * @return $this
+     */
     public function setRoleResourcePrivileges(array $roleResourcePrivileges)
     {
         if (empty($roleResourcePrivileges)) {
@@ -56,23 +60,17 @@ class Acl extends ZendAcl
      */
     public function getRoleResourcePrivileges()
     {
-        if (empty($this->roleResourcePrivileges)) {
-            throw new RuntimeException('Empty Role Resource Privileges');
-        }
-
         return $this->roleResourcePrivileges;
     }
 
     /**
      * @return void
      */
-    public function addRules()
+    protected function addRules()
     {
-        if (empty($this->roleResourcePrivileges)) {
-            return;
-        }
+        $roleResourcePrivileges = $this->getRoleResourcePrivileges();
 
-        foreach ($this->roleResourcePrivileges as $roleName => $resources) {
+        foreach ($roleResourcePrivileges as $roleName => $resources) {
             if (!$this->hasRole($roleName)) {
                 $this->addRole(new Role($roleName));
             }
@@ -95,5 +93,16 @@ class Acl extends ZendAcl
                 }
             }
         }
+    }
+
+    /**
+     * @param  \Zend\Permissions\Acl\Role\RoleInterface|string $role
+     * @param  \Zend\Permissions\Acl\Resource\ResourceInterface|string $resource
+     * @param  string $privilege
+     * @return bool
+     */
+    public function isAllowed($role = null, $resource = null, $privilege = null)
+    {
+        return $this->hasRole($role) && $this->hasResource($resource) && parent::isAllowed($role, $resource, $privilege);
     }
 }
